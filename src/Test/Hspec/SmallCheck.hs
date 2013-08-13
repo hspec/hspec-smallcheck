@@ -8,4 +8,4 @@ import           Test.SmallCheck
 import           Test.SmallCheck.Drivers
 
 instance Example (Property IO) where
-  evaluateExample _ p = maybe Success (Fail . ppFailure) <$> smallCheckM 5 p
+  evaluateExample c p = maybe Success (Fail . ppFailure) <$> smallCheckM (paramsSmallCheckDepth c) p

@@ -28,4 +28,4 @@ spec = do
         evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
   where
     evaluateExample = H.evaluateExample defaultParams
-    defaultParams = H.Params (H.configQuickCheckArgs H.defaultConfig) (const $ return ())
+    defaultParams = H.Params (H.configQuickCheckArgs H.defaultConfig) (H.configSmallCheckDepth H.defaultConfig) (const $ return ())
