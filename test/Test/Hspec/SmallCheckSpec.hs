@@ -22,7 +22,7 @@ spec = do
         evaluateExample (test False :: Property IO) `shouldReturn` H.Fail "condition is false"
 
       it "shows what falsified it" $ do
-        evaluateExample (test (/= (23 :: Int)) :: Property IO) `shouldReturn` H.Fail "there exists 23 such that\n  condition is false"
+        evaluateExample (test (/= (2 :: Int)) :: Property IO) `shouldReturn` H.Fail "there exists 2 such that\n  condition is false"
 
       it "propagates exceptions" $ do
         evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
