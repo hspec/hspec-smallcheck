@@ -7,6 +7,7 @@ import qualified Test.Hspec.Core as H
 import qualified Test.Hspec.Runner as H
 import           Test.SmallCheck
 import           Test.SmallCheck.Drivers
+import           Test.QuickCheck (stdArgs)
 
 main :: IO ()
 main = hspec spec
@@ -27,5 +28,9 @@ spec = do
       it "propagates exceptions" $ do
         evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
   where
-    evaluateExample = H.evaluateExample defaultParams
-    defaultParams = H.Params (H.configQuickCheckArgs H.defaultConfig) (H.configSmallCheckDepth H.defaultConfig) (const $ return ())
+
+    evaluateExample :: Example a => a -> IO H.Result
+    evaluateExample e = H.evaluateExample e defaultParams id
+
+    defaultParams :: H.Params
+    defaultParams = H.Params stdArgs (H.configSmallCheckDepth H.defaultConfig) (const $ return ())

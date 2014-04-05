@@ -12,7 +12,7 @@ property :: Testable IO a => a -> Property IO
 property = test
 
 instance Example (Property IO) where
-  evaluateExample c p = do
+  evaluateExample p c _ = do
     counter <- newIORef 0
     let hook _ = do
           modifyIORef counter succ

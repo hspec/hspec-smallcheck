@@ -1,5 +1,5 @@
 name:             hspec-smallcheck
-version:          0.1.0
+version:          0.2.0
 license:          MIT
 license-file:     LICENSE
 copyright:        (c) 2013 Simon Hengel
@@ -26,7 +26,7 @@ library
       Test.Hspec.SmallCheck
   build-depends:
       base              == 4.*
-    , hspec             >= 1.7
+    , hspec             >= 1.8
     , smallcheck        >= 1.0
 
 test-suite spec
@@ -40,6 +40,8 @@ test-suite spec
       Spec.hs
   build-depends:
       base              == 4.*
-    , smallcheck
-    , hspec-smallcheck
     , hspec
+    , smallcheck
+
+    , hspec-smallcheck
+    , QuickCheck
