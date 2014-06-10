@@ -30,7 +30,7 @@ spec = do
   where
 
     evaluateExample :: Example a => a -> IO H.Result
-    evaluateExample e = H.evaluateExample e defaultParams id
+    evaluateExample e = H.evaluateExample e defaultParams id (const $ return ())
 
     defaultParams :: H.Params
-    defaultParams = H.Params stdArgs (H.configSmallCheckDepth H.defaultConfig) (const $ return ())
+    defaultParams = H.Params stdArgs (H.configSmallCheckDepth H.defaultConfig)
