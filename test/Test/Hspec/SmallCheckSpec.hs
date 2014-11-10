@@ -1,9 +1,10 @@
+{-# LANGUAGE TypeFamilies #-}
 module Test.Hspec.SmallCheckSpec (main, spec) where
 
 import           Test.Hspec
 
 import           Test.Hspec.SmallCheck ()
-import qualified Test.Hspec.Core as H
+import qualified Test.Hspec.Core.Spec as H
 import qualified Test.Hspec.Runner as H
 import           Test.SmallCheck
 import           Test.SmallCheck.Drivers
@@ -29,8 +30,8 @@ spec = do
         evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
   where
 
-    evaluateExample :: Example a => a -> IO H.Result
-    evaluateExample e = H.evaluateExample e defaultParams id (const $ return ())
+    evaluateExample :: (Example a, Arg a ~ ()) => a -> IO H.Result
+    evaluateExample e = H.evaluateExample e defaultParams ($ ()) (const $ return ())
 
     defaultParams :: H.Params
     defaultParams = H.Params stdArgs (H.configSmallCheckDepth H.defaultConfig)
