@@ -19,4 +19,4 @@ instance Example (Property IO) where
           modifyIORef counter succ
           n <- readIORef counter
           reportProgress (n, 0)
-    maybe Success (Fail . ppFailure) <$> smallCheckWithHook (paramsSmallCheckDepth c) hook p
+    maybe Success (Fail Nothing . ppFailure) <$> smallCheckWithHook (paramsSmallCheckDepth c) hook p

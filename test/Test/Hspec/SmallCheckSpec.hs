@@ -21,10 +21,10 @@ spec = do
         evaluateExample (test True :: Property IO) `shouldReturn` H.Success
 
       it "returns Fail if property does not hold" $ do
-        evaluateExample (test False :: Property IO) `shouldReturn` H.Fail "condition is false"
+        evaluateExample (test False :: Property IO) `shouldReturn` H.Fail Nothing "condition is false"
 
       it "shows what falsified it" $ do
-        evaluateExample (test (/= (2 :: Int)) :: Property IO) `shouldReturn` H.Fail "there exists 2 such that\n  condition is false"
+        evaluateExample (test (/= (2 :: Int)) :: Property IO) `shouldReturn` H.Fail Nothing "there exists 2 such that\n  condition is false"
 
       it "propagates exceptions" $ do
         evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
