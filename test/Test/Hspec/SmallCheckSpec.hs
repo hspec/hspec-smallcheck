@@ -1,4 +1,5 @@
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE CPP #-}
 module Test.Hspec.SmallCheckSpec (main, spec) where
 
 import           Test.Hspec
@@ -21,10 +22,18 @@ spec = do
         evaluateExample (test True :: Property IO) `shouldReturn` H.Success
 
       it "returns Fail if property does not hold" $ do
+#if MIN_VERSION_hspec_core(2,2,0)
         evaluateExample (test False :: Property IO) `shouldReturn` H.Fail Nothing "condition is false"
+#else
+        evaluateExample (test False :: Property IO) `shouldReturn` H.Fail "condition is false"
+#endif
 
       it "shows what falsified it" $ do
+#if MIN_VERSION_hspec_core(2,2,0)
         evaluateExample (test (/= (2 :: Int)) :: Property IO) `shouldReturn` H.Fail Nothing "there exists 2 such that\n  condition is false"
+#else
+        evaluateExample (test (/= (2 :: Int)) :: Property IO) `shouldReturn` H.Fail "there exists 2 such that\n  condition is false"
+#endif
 
       it "propagates exceptions" $ do
         evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
