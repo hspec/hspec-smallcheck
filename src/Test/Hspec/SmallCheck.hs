@@ -21,7 +21,9 @@ instance Example (Property IO) where
           modifyIORef counter succ
           n <- readIORef counter
           reportProgress (n, 0)
-#if MIN_VERSION_hspec_core(2,2,0)
+#if MIN_VERSION_hspec_core(2,4,0)
+    maybe Success (Failure Nothing . Reason . ppFailure) <$> smallCheckWithHook (paramsSmallCheckDepth c) hook p
+#elif MIN_VERSION_hspec_core(2,2,0)
     maybe Success (Fail Nothing . ppFailure) <$> smallCheckWithHook (paramsSmallCheckDepth c) hook p
 #else
     maybe Success (Fail . ppFailure) <$> smallCheckWithHook (paramsSmallCheckDepth c) hook p
