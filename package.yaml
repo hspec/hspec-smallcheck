@@ -1,0 +1,33 @@
+name:             hspec-smallcheck
+version:          0.4.2
+license:          MIT
+license-file:     LICENSE
+copyright:        (c) 2013-2018 Simon Hengel
+maintainer:       Simon Hengel <sol@typeful.net>
+build-type:       Simple
+category:         Testing
+bug-reports:      https://github.com/hspec/hspec-smallcheck/issues
+homepage:         http://hspec.github.io/
+synopsis:         SmallCheck support for the Hspec testing framework
+description:      SmallCheck support for the Hspec testing framework
+
+github: hspec/hspec-smallcheck
+
+ghc-options: -Wall
+
+dependencies:
+  - base == 4.*
+  - hspec-core >= 2.4
+  - smallcheck >= 1.1
+
+library:
+  source-dirs: src
+
+tests:
+  spec:
+    source-dirs: test
+    main: Spec.hs
+    dependencies:
+      - hspec-smallcheck
+      - hspec
+      - QuickCheck
