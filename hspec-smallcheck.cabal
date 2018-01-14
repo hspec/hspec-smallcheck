@@ -2,10 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3a48ccd3ec9fd22ed7b7c2e9a316748d05bf932b0bc696e53c0b86e31afb63a7
+-- hash: 9cd99f0806cf8dfefb5b2761767e11bcc64bbb719b6d31200201b36702038392
 
 name:             hspec-smallcheck
-version:          0.4.2
+version:          0.5.0
 license:          MIT
 license-file:     LICENSE
 copyright:        (c) 2013-2018 Simon Hengel
