@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3163a00d419b82ca0477b357c51d53226e66dadb2a075bc0dc533b4bf546b05e
+-- hash: 3a48ccd3ec9fd22ed7b7c2e9a316748d05bf932b0bc696e53c0b86e31afb63a7
 
 name:             hspec-smallcheck
 version:          0.4.2
@@ -34,7 +34,7 @@ library
       Paths_hspec_smallcheck
   build-depends:
       HUnit
-    , base ==4.*
+    , base >=4.5.0.0 && <5
     , call-stack
     , hspec-core ==2.4.*
     , smallcheck >=1.1
@@ -50,7 +50,7 @@ test-suite example
   ghc-options: -Wall
   build-depends:
       HUnit
-    , base ==4.*
+    , base >=4.5.0.0 && <5
     , call-stack
     , hspec
     , hspec-core ==2.4.*
@@ -75,7 +75,7 @@ test-suite spec
   build-depends:
       HUnit
     , QuickCheck
-    , base ==4.*
+    , base >=4.5.0.0 && <5
     , call-stack
     , hspec
     , hspec-core ==2.4.*
