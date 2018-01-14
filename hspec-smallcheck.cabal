@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7dc1081fc5189956c10a63981b52d20074be7b81f3db4ebbbefd5042adb3e209
+-- hash: 3163a00d419b82ca0477b357c51d53226e66dadb2a075bc0dc533b4bf546b05e
 
 name:             hspec-smallcheck
 version:          0.4.2
@@ -29,10 +29,32 @@ library
   exposed-modules:
       Test.Hspec.SmallCheck
   other-modules:
+      Test.Hspec.SmallCheck.Compat
+      Test.Hspec.SmallCheck.Types
       Paths_hspec_smallcheck
   build-depends:
-      base ==4.*
-    , hspec-core >=2.4
+      HUnit
+    , base ==4.*
+    , call-stack
+    , hspec-core ==2.4.*
+    , smallcheck >=1.1
+  default-language: Haskell2010
+
+test-suite example
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_hspec_smallcheck
+  hs-source-dirs:
+      example
+  ghc-options: -Wall
+  build-depends:
+      HUnit
+    , base ==4.*
+    , call-stack
+    , hspec
+    , hspec-core ==2.4.*
+    , hspec-smallcheck
     , smallcheck >=1.1
   default-language: Haskell2010
 
@@ -40,16 +62,22 @@ test-suite spec
   type: exitcode-stdio-1.0
   ghc-options: -Wall
   hs-source-dirs:
+      src
       test
   main-is: Spec.hs
   other-modules:
+      Test.Hspec.SmallCheck
+      Test.Hspec.SmallCheck.Compat
+      Test.Hspec.SmallCheck.Types
+      Test.Hspec.SmallCheck.TypesSpec
       Test.Hspec.SmallCheckSpec
       Paths_hspec_smallcheck
   build-depends:
-      QuickCheck
+      HUnit
+    , QuickCheck
     , base ==4.*
+    , call-stack
     , hspec
-    , hspec-core >=2.4
-    , hspec-smallcheck
+    , hspec-core ==2.4.*
     , smallcheck >=1.1
   default-language: Haskell2010

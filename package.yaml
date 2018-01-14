@@ -17,17 +17,27 @@ ghc-options: -Wall
 
 dependencies:
   - base == 4.*
-  - hspec-core >= 2.4
+  - hspec-core == 2.4.*
   - smallcheck >= 1.1
+  - call-stack
+  - HUnit
 
 library:
+  exposed-modules: Test.Hspec.SmallCheck
   source-dirs: src
 
 tests:
   spec:
-    source-dirs: test
+    source-dirs:
+      - src
+      - test
     main: Spec.hs
     dependencies:
-      - hspec-smallcheck
       - hspec
       - QuickCheck
+  example:
+    source-dirs: example
+    main: Spec.hs
+    dependencies:
+      - hspec
+      - hspec-smallcheck

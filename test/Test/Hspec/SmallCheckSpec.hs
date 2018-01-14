@@ -1,13 +1,14 @@
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE CPP #-}
 module Test.Hspec.SmallCheckSpec (main, spec) where
 
 import           Test.Hspec
 
 import qualified Test.Hspec.Core.Spec as H
 import qualified Test.Hspec.Runner as H
-import           Test.SmallCheck (Property)
+import           Test.SmallCheck
 import           Test.QuickCheck (stdArgs)
+import           Test.HUnit (Assertion, assertFailure, assertEqual)
 
 import           Test.Hspec.SmallCheck
 
@@ -17,19 +18,32 @@ main = hspec spec
 spec :: Spec
 spec = do
   describe "evaluateExample" $ do
-    context "Property IO" $ do
+    context "with Property IO" $ do
       it "returns Success if property holds" $ do
-        evaluateExample (property True) `shouldReturn` H.Success
+        eval True `shouldReturn` H.Success
 
-      it "returns Fail if property does not hold" $ do
-        evaluateExample (property False) `shouldReturn` H.Failure Nothing (H.Reason "condition is false")
+      it "returns Failure if property does not hold" $ do
+        eval False `shouldReturn` H.Failure Nothing (H.Reason "condition is false")
 
       it "shows what falsified it" $ do
-        evaluateExample (property (/= (2 :: Int))) `shouldReturn` H.Failure Nothing (H.Reason "there exists 2 such that\n  condition is false")
+        eval (/= (2 :: Int)) `shouldReturn` H.Failure Nothing (H.Reason "there exists 2 such that\n  condition is false")
 
       it "propagates exceptions" $ do
-        evaluateExample (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
+        eval (error "foobar" :: Property IO) `shouldThrow` errorCall "foobar"
+
+      context "with HUnit Assertion" $ do
+        it "includes failure reason" $ do
+          H.Failure _loc reason <- eval ((\ _ -> assertFailure "some failure") :: Int -> Assertion)
+          reason `shouldBe` H.Reason "there exists 0 such that\nsome failure"
+
+        context "with assertEqual" $ do
+          it "includes actual and expected" $ do
+            H.Failure _loc reason <- eval (assertEqual "foo" (42 :: Int))
+            reason `shouldBe` H.ExpectedButGot (Just "there exists 0 such that\nfoo") "42" "0"
   where
+    eval :: Testable IO a => a -> IO H.Result
+    eval = evaluateExample . property
+
     evaluateExample :: (Example a, Arg a ~ ()) => a -> IO H.Result
     evaluateExample e = H.evaluateExample e defaultParams ($ ()) (const $ return ())
 
