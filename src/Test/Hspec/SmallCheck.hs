@@ -27,7 +27,6 @@ srcLocToLocation loc = Location {
   locationFile = srcLocFile loc
 , locationLine = srcLocStartLine loc
 , locationColumn = srcLocStartCol loc
-, locationAccuracy = ExactLocation
 }
 
 instance Testable IO (IO ()) where
@@ -52,7 +51,7 @@ instance Example (Property IO) where
           n <- readIORef counter
           reportProgress (n, 0)
     r <- smallCheckWithHook (paramsSmallCheckDepth c) hook p
-    return $ case r of
+    return . Result "" $ case r of
       Just e -> case T.parseResult (ppFailure e) of
         (m, Just (T.Failure loc reason)) -> Failure loc $ case reason of
           T.Reason err -> Reason (fromMaybe "" $ T.concatPrefix m err)

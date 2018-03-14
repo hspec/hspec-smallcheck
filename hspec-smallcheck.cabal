@@ -1,11 +1,11 @@
--- This file has been generated from package.yaml by hpack version 0.21.2.
+-- This file has been generated from package.yaml by hpack version 0.27.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9cd99f0806cf8dfefb5b2761767e11bcc64bbb719b6d31200201b36702038392
+-- hash: 2fe681bca0766b159304a8582e5751a076fd3feb25e780316d6dbac9d0b27d10
 
 name:             hspec-smallcheck
-version:          0.5.0
+version:          0.5.1
 license:          MIT
 license-file:     LICENSE
 copyright:        (c) 2013-2018 Simon Hengel
@@ -36,7 +36,7 @@ library
       HUnit
     , base >=4.5.0.0 && <5
     , call-stack
-    , hspec-core ==2.4.*
+    , hspec-core >=2.5.0
     , smallcheck >=1.1
   default-language: Haskell2010
 
@@ -53,7 +53,7 @@ test-suite example
     , base >=4.5.0.0 && <5
     , call-stack
     , hspec
-    , hspec-core ==2.4.*
+    , hspec-core >=2.5.0
     , hspec-smallcheck
     , smallcheck >=1.1
   default-language: Haskell2010
@@ -78,6 +78,6 @@ test-suite spec
     , base >=4.5.0.0 && <5
     , call-stack
     , hspec
-    , hspec-core ==2.4.*
+    , hspec-core >=2.5.0
     , smallcheck >=1.1
   default-language: Haskell2010
