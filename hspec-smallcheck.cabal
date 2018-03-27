@@ -1,8 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.27.0.
+-- This file has been generated from package.yaml by hpack version 0.28.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2fe681bca0766b159304a8582e5751a076fd3feb25e780316d6dbac9d0b27d10
+-- hash: fbec8a5937dbef0304ed4ffc76fe54e7936f61320a4406b0993c15a44933d2b9
 
 name:             hspec-smallcheck
 version:          0.5.1
@@ -76,6 +76,7 @@ test-suite spec
       HUnit
     , QuickCheck
     , base >=4.5.0.0 && <5
+    , base-orphans
     , call-stack
     , hspec
     , hspec-core >=2.5.0

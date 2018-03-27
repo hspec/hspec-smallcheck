@@ -6,6 +6,7 @@ module Test.Hspec.SmallCheckSpec (main, spec) where
 
 import           Test.Hspec
 
+import           Data.Orphans ()
 import qualified Control.Exception as E
 
 import qualified Test.Hspec.Core.Spec as H

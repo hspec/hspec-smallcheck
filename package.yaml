@@ -35,6 +35,7 @@ tests:
     dependencies:
       - hspec
       - QuickCheck
+      - base-orphans
   example:
     source-dirs: example
     main: Spec.hs
