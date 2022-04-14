@@ -1,8 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.7.
 --
 -- see: https://github.com/sol/hpack
---
--- hash: 8fef08d4c8338bfb32b5436d390cd7aa3453e20b39652a3a405efff6e4a0ffcc
 
 name:             hspec-smallcheck
 version:          0.5.2
@@ -11,7 +11,6 @@ license-file:     LICENSE
 copyright:        (c) 2013-2018 Simon Hengel
 maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
-cabal-version:    >= 1.10
 category:         Testing
 bug-reports:      https://github.com/hspec/hspec-smallcheck/issues
 homepage:         http://hspec.github.io/
@@ -36,7 +35,7 @@ library
       HUnit
     , base >=4.5.0.0 && <5
     , call-stack
-    , hspec-core >=2.5.0
+    , hspec-core >=2.10.0
     , smallcheck >=1.1
   default-language: Haskell2010
 
@@ -53,7 +52,7 @@ test-suite example
     , base >=4.5.0.0 && <5
     , call-stack
     , hspec
-    , hspec-core >=2.5.0
+    , hspec-core >=2.10.0
     , hspec-smallcheck
     , smallcheck >=1.1
   default-language: Haskell2010
@@ -61,6 +60,8 @@ test-suite example
 test-suite spec
   type: exitcode-stdio-1.0
   ghc-options: -Wall
+  build-tool-depends:
+      hspec-discover:hspec-discover
   hs-source-dirs:
       src
       test
@@ -79,6 +80,6 @@ test-suite spec
     , base-orphans
     , call-stack
     , hspec
-    , hspec-core >=2.5.0
+    , hspec-core >=2.10.0
     , smallcheck >=1.1
   default-language: Haskell2010
