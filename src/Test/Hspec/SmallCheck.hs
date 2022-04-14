@@ -50,7 +50,7 @@ instance Example (Property IO) where
           modifyIORef counter succ
           n <- readIORef counter
           reportProgress (n, 0)
-    r <- smallCheckWithHook (paramsSmallCheckDepth c) hook p
+    r <- smallCheckWithHook (fromMaybe 5 $ paramsSmallCheckDepth c) hook p
     return . Result "" $ case r of
       Just e -> case T.parseResult (ppFailure e) of
         (m, Just (T.Failure loc reason)) -> Failure loc $ case reason of
